@@ -1,7 +1,6 @@
 
 use std::fmt::Display;
 use std::fmt;
-use std::string;
 //  Shout trait to display both x 
 // and y of point
 pub trait Shout {
@@ -21,7 +20,7 @@ struct Point<T,U>
 // recreate itself if it uses the same types
 impl <T,U> Point<T,U>{
     fn new(self,x:T , y:U) -> Self {
-        Self {x ,y}
+        return Self {x ,y}
     }
 }
 //  implement Shout for points that
@@ -37,7 +36,7 @@ impl<T:Display,U:Display> Shout for Point<T,U> {
 //  struct to functions which require it
 impl <T: Display,U:Display> Display for Point<T,U>{
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self.shouting() )
+        return write!(f, "{}", self.shouting() )
     }
 }
 // implement an associated function with 
@@ -48,20 +47,20 @@ impl <T: Display,U: Display> Point<T,U> {
         let compare_x = format!("{}",point.x);
         let compare_y =  format!("{}",point.y);
         if compare_x >= compare_y {
-            format!("The most important part of Point is x :: {}",compare_x);
+            return format!("The most important part of Point is x :: {}",compare_x);
         }
-        format!("The most important part of Point is y :: {}",compare_y)
+        return format!("The most important part of Point is y :: {}",compare_y)
     }
 }
-// implement getters for both x and y of 
-//  Points
+// implement getters for both 
+// x and y of Points
 impl<T,U> Point<T,U> {
     fn x(self) -> T {
-        self.x
+        return self.x
     }
     
     fn y(self) -> U {
-        self.y
+        return self.y
     }
 }
 // implement a function that a point
@@ -69,7 +68,7 @@ impl<T,U> Point<T,U> {
 //  of different/same/whatever types
 impl <T,U> Point<T,U> {
     fn mixup<V,W>(self, other: Point<V,W>) -> Point<T,W>{
-        Point {
+        return Point {
             x: self.x,
             y:other.y
         }
