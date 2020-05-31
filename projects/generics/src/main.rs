@@ -42,14 +42,16 @@ impl <T: Display,U:Display> Display for Point<T,U>{
 // implement an associated function with 
 //  Point via Point::find_important
 //  as no use of &self is in function signature
-impl <T: Display,U: Display> Point<T,U> {
-    fn find_important(point: Point<T,U>) -> String{
+impl <T: Display,U: Display+Copy> Point<T,U> {
+    fn find_important(point: Point<T,U>) -> Box< dyn Display >{
         let compare_x = format!("{}",point.x);
         let compare_y =  format!("{}",point.y);
         if compare_x >= compare_y {
-            return format!("The most important part of Point is x :: {}",compare_x);
+            return Box::new(format!(
+                "The most important part of Point is x :: {}",
+                compare_x));
         }
-        return format!("The most important part of Point is y :: {}",compare_y)
+        return Box::new(-1);
     }
 }
 // implement getters for both 
@@ -102,7 +104,7 @@ fn main() {
         string_point.mixup(complex_point);
     //  pass structs to println!
     println!(
-    "A same point {}\n,{}",
+    "A same point {}\n{}",
     same_point,
     Point::find_important(same_point)
     );
